@@ -4,16 +4,22 @@ import { AppRoutingModule } from './app-routing.module'; // Import your AppRouti
 import { AppComponent } from './app.component';
 import { ArticleItemComponent } from './article-item/article-item.component';
 import { ArticleListComponent } from './article-list/article-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ArticleNewTemplateComponent } from './article-new-template/article-new-template.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticleListComponent,
+    ArticleNewTemplateComponent,
     ArticleItemComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule // Add AppRoutingModule to imports
+    AppRoutingModule,
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
