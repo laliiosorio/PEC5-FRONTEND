@@ -7,13 +7,17 @@ import { ArticleListComponent } from './article-list/article-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ArticleNewTemplateComponent } from './article-new-template/article-new-template.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ArticleNewReactiveComponent } from './article-new-reactive/article-new-reactive.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticleListComponent,
     ArticleNewTemplateComponent,
+    ArticleNewReactiveComponent,
     ArticleItemComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

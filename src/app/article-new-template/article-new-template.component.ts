@@ -1,47 +1,41 @@
-import { Component } from '@angular/core'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-article-new-template',
   templateUrl: './article-new-template.component.html',
   styleUrls: ['./article-new-template.component.css']
 })
-export class ArticleNewTemplateComponent {
-  articleForm: FormGroup
+export class ArticleNewTemplateComponent implements OnInit {
+  articleForm!: FormGroup;
 
-  constructor (private fb: FormBuilder) {
-    this.articleForm = this.fb.group({
-      name: ['', Validators.required],
-      price: [
-        '',
-        [Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]
-      ],
-      imageUrl: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            /^(https?:\/\/[^\s]+(\.[^\s]+)+\.[a-z]{2,3}\/[^\s]+(\.[^\s]+)?)$/
-          )
-        ]
-      ],
-      isOnSale: [false]
-    })
+  constructor() {}
+
+  ngOnInit() {
+    this.articleForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required, Validators.min(0.1)]),
+      imageUrl: new FormControl('', [
+        Validators.required,
+        Validators.pattern('https?://[^\\s/$.?#].[^\\s]*\\.(jpg|jpeg|png|gif)')
+      ]),
+      isOnSale: new FormControl(false)
+    });
   }
 
-  onSubmit () {
+  onSubmit() {
     if (this.articleForm.valid) {
-      console.log('Formulario válido, datos:', this.articleForm.value)
-      this.articleForm.reset()
+      console.log('Formulario válido, datos:', this.articleForm.value);
+      this.articleForm.reset();
     } else {
-      this.markAllAsTouched()
-      console.log('Formulario no válido')
+      console.log('Formulario no válido');
+      this.markAllAsTouched();
     }
   }
 
-  private markAllAsTouched () {
+  markAllAsTouched() {
     Object.values(this.articleForm.controls).forEach(control => {
-      control.markAsTouched()
-    })
+      control.markAsTouched();
+    });
   }
 }
